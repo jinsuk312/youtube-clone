@@ -8,6 +8,10 @@
     <title>VideoTube</title>
 </head>
 <body>
-    Youtube Clone
+    <div id="pageContainer">
+        <div id="mastHeadContainer">hello</div>
+        <div id="sideNavContainer"></div>
+        <div id="mainSectionContainer"></div>
+    </div>
 </body>
 </html>
