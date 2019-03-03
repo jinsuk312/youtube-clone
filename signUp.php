@@ -10,16 +10,16 @@ if(isset($_POST["submitButton"])) {
     // static function :: 
     $firstName = FormSanitizer::sanitizeFormString($_POST["firstName"]);
     $lastName = FormSanitizer::sanitizeFormString($_POST["lastName"]);
-    $userName = FormSanitizer::sanitizeFormUsername($_POST["userName"]);
+    $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
     $email = FormSanitizer::sanitizeFormEmail($_POST["email"]);
     $email2 = FormSanitizer::sanitizeFormEmail($_POST["email2"]);
     $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
     $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
 
-    $wasSuccessful = $account->register($firstName, $lastName, $userName, $email, $email2, $password, $password2);
+    $wasSuccessful = $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
     
     if($wasSuccessful){
-        $_SESSION["userLoggedIn"] = $userName;
+        $_SESSION["userLoggedIn"] = $username;
         header("Location: index.php");
     }
 }
@@ -61,7 +61,7 @@ function getInputValue($name){
                     <input type="text" name="lastName" placeholder="Last name" value="<?php getInputValue('lastName'); ?>" autocomplete="off" required>
                     <?php echo $account->getError(Constants::$usernameCharacters);?>
                     <?php echo $account->getError(Constants::$usernameTaken);?>
-                    <input type="text" name="userName" placeholder="Username" value="<?php getInputValue('userName'); ?>" autocomplete="off" required>
+                    <input type="text" name="username" placeholder="Username" value="<?php getInputValue('username'); ?>" autocomplete="off" required>
                     <?php echo $account->getError(Constants::$emailsDoNotMatch);?>
                     <?php echo $account->getError(Constants::$emailInvalid);?>
                     <?php echo $account->getError(Constants::$emailTaken);?>
