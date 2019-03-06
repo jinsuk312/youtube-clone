@@ -1,4 +1,6 @@
 <?php
+require_once("includes/classes/VideoInfoControls.php");
+
 class VideoInfoSection{
 
     private $con, $video, $userLoggedInObj;
@@ -16,6 +18,9 @@ class VideoInfoSection{
         $title = $this->video->getTitle();
         $views = $this->video->getViews();
 
+        $videoInfoControl = new VideoInfoControls($this->video, $this->userLoggedInObj);
+        $controls = $videoInfoControl->create();
+
         return "<div class='videoInfo'>
             <h1>
                 $title
@@ -24,6 +29,7 @@ class VideoInfoSection{
                 <span class='viewCount'>
                     $views
                 </span>
+                $controls
             </div>
         </div>";
     }
