@@ -12,6 +12,11 @@ class User {
         // store data 
         $this->sqlData = $query->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function isLoggedIn(){
+        return isset($_SESSION["userLoggedIn"]);
+    }
+
     public function getUserName() {
         return $this->sqlData["username"];
     }
