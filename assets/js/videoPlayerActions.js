@@ -1,32 +1,28 @@
 function likeVideo(button, videoId) {
-    $.post("ajax/likeVideo.php", {videoId: videoId})
-    .done(function(data) {
-        
-        var likeButton = $(button);
-        var dislikeButton = $(button).siblings(".dislikeButton");
+    $.post("ajax/likeVideo.php", { videoId: videoId })
+        .done(function (data) {
 
-        likeButton.addClass("active");
-        dislikeButton.removeClass("active");
+            var likeButton = $(button);
+            var dislikeButton = $(button).siblings(".dislikeButton");
 
-        var result = JSON.parse(data);
-        updateLikesValue(likeButton.find(".text"), result.likes);
-        updateLikesValue(dislikeButton.find(".text"), result.dislikes);
-        // if they unliked it
-        if(result.likes < 0){
-            likeButton.removeClass("active");
-            // first img, incase of future use
-            likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up.png");
-        }
-        else{
-            likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up-active.png");
+            likeButton.addClass("active");
+            dislikeButton.removeClass("active");
 
-        }
-        // always make the dislike button regular in case of above
-        dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down.png");
+            var result = JSON.parse(data);
+            updateLikesValue(likeButton.find(".text"), result.likes);
+            updateLikesValue(dislikeButton.find(".text"), result.dislikes);
 
-    });
+            if (result.likes < 0) {
+                likeButton.removeClass("active");
+                likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up.png");
+            }
+            else {
+                likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up-active.png")
+            }
+
+            dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down.png");
+        });
 }
-
 
 function dislikeVideo(button, videoId) {
     $.post("ajax/dislikeVideo.php", { videoId: videoId })
@@ -41,19 +37,16 @@ function dislikeVideo(button, videoId) {
             var result = JSON.parse(data);
             updateLikesValue(likeButton.find(".text"), result.likes);
             updateLikesValue(dislikeButton.find(".text"), result.dislikes);
-            // if they unliked it
+
             if (result.dislikes < 0) {
                 dislikeButton.removeClass("active");
-                // first img, incase of future use
                 dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down.png");
             }
             else {
-                dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down-active.png");
-
+                dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down-active.png")
             }
-            // always make the dislike button regular in case of above
-            likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up.png");
 
+            likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up.png");
         });
 }
 
